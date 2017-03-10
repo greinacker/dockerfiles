@@ -1,0 +1,1 @@
+Modified wordpress image, to avoid any bootstrapping at startup; this allows us to have one or more wordpress sites in subdirectories, without automatically copying and modifying files.
