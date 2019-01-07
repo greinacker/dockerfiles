@@ -5,6 +5,9 @@ Environment variables:
 - AWS_ACCESS_KEY (if using S3)
 - AWS_SECRET_KEY (if using S3)
 - DAILY_SCRIPT - script to be executed on a daily basis, starting in the working directory /work. Note this is the actual script, not a filename of a script.
+- CRON_EMAIL_RECIP - email address to send cron output to. If this is omitted, output will be logged and not emailed.
+- SMTP_SERVER - hostname of SMTP server to send mail to
+- MAIL_FROM_DOMAIN - domain name to send mail from
 
 Additional environment variables may be specified if they are needed for the daily script; for example, we may need to pass in a MYSQL_ROOT_PASSWORD or similar. If the script uses env variables, the $ must be $$ when used in a compose file.
 
@@ -29,4 +32,7 @@ Example compose file snippet:
        AWS_ACCESS_KEY: <key>
        AWS_SECRET_KEY: <key>
        MYSQL_ROOT_PASSWORD: <password>
+       CRON_EMAIL_RECIP: user@mydomain.com
+       MAIL_FROM_DOMAIN: mydomain.com
+       SMTP_SERVER: exim
 ```

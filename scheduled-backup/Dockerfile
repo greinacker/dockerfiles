@@ -1,13 +1,14 @@
 FROM alpine:latest
 
-RUN apk add --no-cache py-pip py-setuptools ca-certificates gnupg mysql-client && \
-    pip install s3cmd  && \
-    rm -rf /var/cache/apk/*
-
-RUN apk add tzdata && \
+RUN apk add --no-cache py-pip py-setuptools ca-certificates gnupg tzdata ssmtp && \
     cp /usr/share/zoneinfo/US/Eastern /etc/localtime && \
     echo "US/Eastern" > /etc/timezone && \
-    apk del tzdata
+    pip install s3cmd  && \
+    apk del tzdata && \
+    rm -rf /var/cache/apk/*
+
+RUN apk add --no-cache mysql-client && \
+    rm -rf /var/cache/apk/*
 
 COPY s3cfg /root/.s3cfg
 COPY start.sh /root/start.sh
